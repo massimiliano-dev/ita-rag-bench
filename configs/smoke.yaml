@@ -1,0 +1,18 @@
+# Tiny offline configuration used by tests and CI: fake embedder, light parser only.
+name: smoke
+domain: normativo
+manifest: corpus/normativo/manifest.yaml
+pdf_dir: corpus/normativo/pdf
+dataset: datasets/normativo/questions.jsonl
+cache_dir: .cache/itarag
+results_dir: results
+k: 10
+candidates: 50
+rrf_k: 60
+parsers:
+  pypdf: {timeout_s: 300, max_mb: 2048}
+chunkers:
+  structure: {max_chars: 1500}
+embeddings:
+  fake: {kind: fake, dim: 64}
+retrievers: [dense, bm25, hybrid]

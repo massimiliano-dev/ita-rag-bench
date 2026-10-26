@@ -1,0 +1,57 @@
+# ita-rag-bench MVP grid: 3 parsers x 3 chunkers x 2 embeddings, retrieval only.
+name: mvp
+domain: normativo
+manifest: corpus/normativo/manifest.yaml
+pdf_dir: corpus/normativo/pdf
+dataset: datasets/normativo/questions.jsonl
+cache_dir: .cache/itarag
+results_dir: results
+k: 10            # metrics cut-off
+candidates: 100  # depth of each ranked list fed to RRF
+rrf_k: 60
+
+parsers:
+  pypdf:
+    timeout_s: 600
+    max_mb: 2048
+  pymupdf:   # AGPL-3.0, optional extra [pymupdf]
+    timeout_s: 600
+    max_mb: 2048
+  docling:   # optional extra [docling]; layout + table models, OCR only on bitmap regions
+    timeout_s: 7200
+    max_mb: 20000
+    options:
+      do_ocr: true
+      do_table_structure: true
+      force_ocr_below_chars_per_page: 200   # scanned-PDF policy, see README
+
+chunkers:
+  fixed:
+    size: 200       # whitespace tokens
+    overlap: 40
+  recursive:
+    max_chars: 1200
+    overlap_chars: 150
+  structure:
+    max_chars: 1500
+    min_chars: 80
+
+embeddings:
+  e5-base:
+    kind: sentence-transformers
+    model: intfloat/multilingual-e5-base
+    revision: d128750597153bb5987e10b1c3493a34e5a4502a   # pinned commit (MIT licence)
+    query_prefix: "query: "
+    passage_prefix: "passage: "
+    max_seq_length: 512
+    batch_size: 32
+  bge-m3:
+    kind: sentence-transformers
+    model: BAAI/bge-m3
+    revision: 5617a9f61b028005a4858fdac845db406aefb181   # pinned commit (MIT licence), dense only
+    query_prefix: ""
+    passage_prefix: ""
+    max_seq_length: 1024
+    batch_size: 16
+
+retrievers: [dense, bm25, hybrid]

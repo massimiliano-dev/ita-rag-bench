@@ -1,0 +1,48 @@
+# --- corpus: PDFs are re-downloaded and verified with `itarag corpus fetch` (never committed)
+*.pdf
+corpus/**/pdf/
+*.part
+
+# --- caches (parsed text JSON, embeddings NPY) and model weights
+.cache/
+**/__pycache__/
+*.py[cod]
+*.safetensors
+*.bin
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.gguf
+hf_cache/
+models/
+
+# --- secrets: never commit environment files or credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- python / tooling
+.venv/
+build/
+dist/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+requirements-audit.txt
+_site/
+
+# --- results: summary.json + run.json are committed; per-question files are small
+# (~2 MB per full run) and committed too. Ignore ad-hoc runs.
+results/*-smoke*/
+results/tmp-*/
+
+# --- OS / editors
+.DS_Store
+.idea/
+.vscode/

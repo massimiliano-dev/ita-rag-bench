@@ -1,0 +1,164 @@
+{
+  "run_id": "2026-10-26-mvp",
+  "created": "2026-10-26T12:01:41+00:00",
+  "config_name": "mvp",
+  "config": {
+    "name": "mvp",
+    "domain": "normativo",
+    "manifest": "corpus/normativo/manifest.yaml",
+    "pdf_dir": "corpus/normativo/pdf",
+    "dataset": "datasets/normativo/questions.jsonl",
+    "cache_dir": ".cache/itarag",
+    "results_dir": "results",
+    "k": 10,
+    "candidates": 100,
+    "rrf_k": 60,
+    "parsers": {
+      "pypdf": {
+        "timeout_s": 600,
+        "max_mb": 2048
+      },
+      "pymupdf": {
+        "timeout_s": 600,
+        "max_mb": 2048
+      },
+      "docling": {
+        "timeout_s": 7200,
+        "max_mb": 20000,
+        "options": {
+          "do_ocr": true,
+          "do_table_structure": true,
+          "force_ocr_below_chars_per_page": 200
+        }
+      }
+    },
+    "chunkers": {
+      "fixed": {
+        "size": 200,
+        "overlap": 40
+      },
+      "recursive": {
+        "max_chars": 1200,
+        "overlap_chars": 150
+      },
+      "structure": {
+        "max_chars": 1500,
+        "min_chars": 80
+      }
+    },
+    "embeddings": {
+      "e5-base": {
+        "kind": "sentence-transformers",
+        "model": "intfloat/multilingual-e5-base",
+        "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+        "query_prefix": "query: ",
+        "passage_prefix": "passage: ",
+        "max_seq_length": 512,
+        "batch_size": 32
+      },
+      "bge-m3": {
+        "kind": "sentence-transformers",
+        "model": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "query_prefix": "",
+        "passage_prefix": "",
+        "max_seq_length": 1024,
+        "batch_size": 16
+      }
+    },
+    "retrievers": [
+      "dense",
+      "bm25",
+      "hybrid"
+    ]
+  },
+  "config_sha256": "e2955208dd518556b3a9aee6a7f95681df2de1ab516a200153b36fff311a5f3a",
+  "split": "all",
+  "dataset": {
+    "path": "questions.jsonl",
+    "sha256": "df32ee95639a8ee7ca68f71678f365448e5041e8ddbb5037b250a63dc1c75389",
+    "n_items": 150,
+    "n_answerable": 135,
+    "status_counts": {
+      "draft": 150
+    },
+    "category_counts": {
+      "fattuale": 87,
+      "multi_hop": 20,
+      "senza_risposta": 15,
+      "tabellare": 22,
+      "temporale": 6
+    }
+  },
+  "senza_risposta": {
+    "count": 15,
+    "note": "Excluded from retrieval metrics. Abstention will be measured once generation is added; retrieval always returns k chunks."
+  },
+  "corpus": {
+    "manifest_sha256": "9e4259a078131f7b093299a8bef149d7d5f4018de387473ff28534dae900ab2f",
+    "documents_sha256": "ffb5e00c5b9a9df9997255fd3db14c0a04d836cc4207b3b89c1dd030b7c9de4b",
+    "n_documents": 20
+  },
+  "matching": {
+    "token_overlap_threshold": 0.85
+  },
+  "parsers": {
+    "pypdf": {
+      "seconds": 7.863366333007434,
+      "pages": 700,
+      "seconds_per_page": 0.011233380475724907,
+      "near_empty_pages": 22,
+      "failed_docs": [],
+      "chars": 3998446,
+      "versions": [
+        "pypdf==6.21.2"
+      ]
+    },
+    "pymupdf": {
+      "seconds": 5.867145750002237,
+      "pages": 700,
+      "seconds_per_page": 0.008381636785717482,
+      "near_empty_pages": 22,
+      "failed_docs": [],
+      "chars": 3635922,
+      "versions": [
+        "pymupdf==2.0"
+      ]
+    },
+    "docling": {
+      "seconds": 513.4401076219965,
+      "pages": 700,
+      "seconds_per_page": 0.7334858680314236,
+      "near_empty_pages": 9,
+      "failed_docs": [],
+      "chars": 3965185,
+      "versions": [
+        "docling==2.142.1"
+      ]
+    }
+  },
+  "environment": {
+    "python": "3.12.15",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "packages": {
+      "ita-rag-bench": "0.1.0",
+      "pypdf": "6.21.2",
+      "pymupdf": "2.0",
+      "docling": "2.142.1",
+      "docling-core": "2.104.0",
+      "docling-ibm-models": "4.0.4",
+      "sentence-transformers": "6.2.0",
+      "transformers": "5.20.2",
+      "torch": "2.14.1",
+      "numpy": "2.5.4",
+      "bm25s": "0.3.15",
+      "pystemmer": "3.1.0",
+      "rapidocr": "3.10.0"
+    },
+    "torch_mps_available": true,
+    "torch_cuda_available": false
+  },
+  "wall_seconds": 46.25301274999947
+}

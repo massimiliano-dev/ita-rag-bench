@@ -1,0 +1,422 @@
+domain: normativo
+description: 20 Italian normative acts, original versions as published in the Gazzetta Ufficiale (issue
+  PDFs). act_pages is the 1-based inclusive page range of the act inside the issue PDF.
+user_agent: ita-rag-bench/0.1 (research benchmark; +https://github.com/massimiliano-dev/ita-rag-bench)
+allowed_hosts:
+- www.gazzettaufficiale.it
+min_interval_seconds: 3.0
+max_documents: 20
+max_bytes: 40000000
+documents:
+- id: dm-2023-tasso-legale
+  title: Decreto MEF 29 novembre 2023 - Modifica del saggio degli interessi legali
+  act: D.M. 29 novembre 2023
+  url: https://www.gazzettaufficiale.it/eli/gu/2023/12/11/288/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 288 del 11-12-2023
+  normattiva_urn: ''
+  retrieved: '2026-10-26'
+  sha256: 416a985b2e07a925742f78086034872b19428d485512d3018ab27bcba2272b26
+  pdf_pages: 80
+  act_pages:
+  - 18
+  - 18
+  characteristics:
+    length: short
+    has_tables: false
+    structure: other
+    pdf_quality: native
+  notes: Single-article ministerial decree sharing its only page with another act.
+- id: dm-2024-tasso-legale
+  title: Decreto MEF 10 dicembre 2024 - Determinazione del saggio degli interessi legali
+  act: D.M. 10 dicembre 2024
+  url: https://www.gazzettaufficiale.it/eli/gu/2024/12/16/294/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 294 del 16-12-2024
+  normattiva_urn: ''
+  retrieved: '2026-10-26'
+  sha256: edd2c659eed8953139a8bb6ee38fa0857520aa5b07db11129d62b7b2dd07e8b1
+  pdf_pages: 212
+  act_pages:
+  - 45
+  - 45
+  characteristics:
+    length: short
+    has_tables: false
+    structure: other
+    pdf_quality: native
+  notes: Single-article ministerial decree sharing its only page with another act; supersedes dm-2023-tasso-legale
+    from 1 January 2025.
+- id: dpr-2013-62
+  title: Regolamento recante codice di comportamento dei dipendenti pubblici
+  act: D.P.R. 16 aprile 2013, n. 62
+  url: https://www.gazzettaufficiale.it/eli/gu/2013/06/04/129/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 129 del 04-06-2013
+  normattiva_urn: urn:nir:presidente.repubblica:decreto:2013-04-16;62
+  retrieved: '2026-10-26'
+  sha256: 06b4bd4b55cca5fbd8afc20c02edc6633d25b120ff2b5fe9216168f8086a7fde
+  pdf_pages: 64
+  act_pages:
+  - 7
+  - 16
+  characteristics:
+    length: medium
+    has_tables: false
+    structure: articoli-commi
+    pdf_quality: native
+  notes: ''
+- id: dpr-2023-81
+  title: Regolamento concernente modifiche al D.P.R. 62/2013 (codice di comportamento)
+  act: D.P.R. 13 giugno 2023, n. 81
+  url: https://www.gazzettaufficiale.it/eli/gu/2023/06/29/150/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 150 del 29-06-2023
+  normattiva_urn: urn:nir:presidente.repubblica:decreto:2023-06-13;81
+  retrieved: '2026-10-26'
+  sha256: 3ee38c67f6225f727a76adc7c1bcae33a63b0eeb80acf116e774651ab9b93c48
+  pdf_pages: 88
+  act_pages:
+  - 21
+  - 24
+  characteristics:
+    length: short
+    has_tables: false
+    structure: articoli-commi
+    pdf_quality: native
+  notes: Amends dpr-2013-62 (inserts arts. 11-bis, 11-ter and modifies others).
+- id: dlgs-2013-33
+  title: Riordino della disciplina riguardante gli obblighi di pubblicita', trasparenza e diffusione di
+    informazioni da parte delle pubbliche amministrazioni
+  act: D.Lgs. 14 marzo 2013, n. 33
+  url: https://www.gazzettaufficiale.it/eli/gu/2013/04/05/80/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 80 del 05-04-2013
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2013-03-14;33
+  retrieved: '2026-10-26'
+  sha256: 72ada6370d773fe2c6abd56a817b884f29e018b5ab9199e2b20f391db161b6b7
+  pdf_pages: 168
+  act_pages:
+  - 9
+  - 45
+  characteristics:
+    length: long
+    has_tables: true
+    structure: capitoli
+    pdf_quality: native
+  notes: Annex with a 3-column table (sotto-sezioni of 'Amministrazione trasparente'). Later heavily amended
+    by D.Lgs. 97/2016 (not in corpus).
+- id: l-2012-190
+  title: Disposizioni per la prevenzione e la repressione della corruzione e dell'illegalita' nella pubblica
+    amministrazione
+  act: L. 6 novembre 2012, n. 190
+  url: https://www.gazzettaufficiale.it/eli/gu/2012/11/13/265/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 265 del 13-11-2012
+  normattiva_urn: urn:nir:stato:legge:2012-11-06;190
+  retrieved: '2026-10-26'
+  sha256: d0b1a9cb774876a2d8cd017b428f5aa57a4c47777100fecb15f9f61e74a1ae72
+  pdf_pages: 56
+  act_pages:
+  - 5
+  - 28
+  characteristics:
+    length: medium
+    has_tables: false
+    structure: articoli-commi
+    pdf_quality: native
+  notes: 'Single article (art. 1) with dozens of commi, plus art. 2: stress test for structure-aware chunking.'
+- id: dlgs-2023-24
+  title: Attuazione della direttiva (UE) 2019/1937 (whistleblowing)
+  act: D.Lgs. 10 marzo 2023, n. 24
+  url: https://www.gazzettaufficiale.it/eli/gu/2023/03/15/63/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 63 del 15-03-2023
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2023-03-10;24
+  retrieved: '2026-10-26'
+  sha256: aa219a7a3d66ba198100ac0a6c479990c253fa416fd470b68861c29125f35b2e
+  pdf_pages: 96
+  act_pages:
+  - 8
+  - 40
+  characteristics:
+    length: long
+    has_tables: false
+    structure: capitoli
+    pdf_quality: native
+  notes: Includes a long annex listing EU acts.
+- id: dlgs-2023-36
+  title: Codice dei contratti pubblici
+  act: D.Lgs. 31 marzo 2023, n. 36
+  url: https://www.gazzettaufficiale.it/eli/gu/2023/03/31/77/so/12/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 77 del 31-03-2023 - Suppl. Ordinario n. 12
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2023-03-31;36
+  retrieved: '2026-10-26'
+  sha256: 1604cafa9bbd258ada08978b9ca0376d929017a0ce18c78ee89ea68cd8f07702
+  pdf_pages: 556
+  act_pages:
+  - 5
+  - 258
+  characteristics:
+    length: long
+    has_tables: true
+    structure: capitoli
+    pdf_quality: native
+  notes: Very long code with many cross-references. act_pages covers the articles and annexes I.1-I.6
+    only; annexes I.7-V.3 (pp. 259-556) are excluded to keep the MVP tractable.
+- id: dpr-2011-151
+  title: Regolamento recante semplificazione della disciplina dei procedimenti relativi alla prevenzione
+    degli incendi
+  act: D.P.R. 1 agosto 2011, n. 151
+  url: https://www.gazzettaufficiale.it/eli/gu/2011/09/22/221/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 221 del 22-09-2011
+  normattiva_urn: urn:nir:presidente.repubblica:decreto:2011-08-01;151
+  retrieved: '2026-10-26'
+  sha256: a7687ea5c640cf3a8a8e6d585d19a877c96c8062afca874670e5d9442bde8cb5
+  pdf_pages: 76
+  act_pages:
+  - 5
+  - 46
+  characteristics:
+    length: long
+    has_tables: true
+    structure: articoli-commi
+    pdf_quality: native
+  notes: Annex I is a multi-page table of the 80 activities subject to fire-prevention controls (categories
+    A/B/C).
+- id: dpcm-2013-159
+  title: Regolamento concernente la revisione delle modalita' di determinazione e i campi di applicazione
+    dell'ISEE
+  act: D.P.C.M. 5 dicembre 2013, n. 159
+  url: https://www.gazzettaufficiale.it/eli/gu/2014/01/24/19/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 19 del 24-01-2014
+  normattiva_urn: urn:nir:presidente.consiglio.ministri:decreto:2013-12-05;159
+  retrieved: '2026-10-26'
+  sha256: 035add940b069b6c1097375982a0d2edafbd5d42be9c8f6af18b0da72629f87a
+  pdf_pages: 136
+  act_pages:
+  - 41
+  - 66
+  characteristics:
+    length: medium
+    has_tables: true
+    structure: articoli-commi
+    pdf_quality: native
+  notes: ISEE regulation; annexes with tables (scala di equivalenza) and formulas.
+- id: l-2025-132
+  title: Disposizioni e deleghe al Governo in materia di intelligenza artificiale
+  act: L. 23 settembre 2025, n. 132
+  url: https://www.gazzettaufficiale.it/eli/gu/2025/09/25/223/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 223 del 25-09-2025
+  normattiva_urn: urn:nir:stato:legge:2025-09-23;132
+  retrieved: '2026-10-26'
+  sha256: 4c988d4597728ce27617f8dabc17839ee82186f33d8b3a0a08246cd38b0d7339
+  pdf_pages: 64
+  act_pages:
+  - 3
+  - 31
+  characteristics:
+    length: medium
+    has_tables: false
+    structure: capitoli
+    pdf_quality: native
+  notes: Italian AI law (2025).
+- id: dlgs-2024-138
+  title: Recepimento della direttiva (UE) 2022/2555 (NIS 2)
+  act: D.Lgs. 4 settembre 2024, n. 138
+  url: https://www.gazzettaufficiale.it/eli/gu/2024/10/01/230/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 230 del 01-10-2024
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2024-09-04;138
+  retrieved: '2026-10-26'
+  sha256: 056dfbb1ddd34c163585250ae5631270ed8d27ce16ac5b30576cff4e88169e36
+  pdf_pages: 88
+  act_pages:
+  - 4
+  - 61
+  characteristics:
+    length: long
+    has_tables: true
+    structure: capitoli
+    pdf_quality: native
+  notes: NIS 2 transposition; annexes I-II are landscape (rotated) tables of sectors.
+- id: dlgs-2001-231
+  title: Disciplina della responsabilita' amministrativa delle persone giuridiche
+  act: D.Lgs. 8 giugno 2001, n. 231
+  url: https://www.gazzettaufficiale.it/eli/gu/2001/06/19/140/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 140 del 19-06-2001
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2001-06-08;231
+  retrieved: '2026-10-26'
+  sha256: 481341f2f55c19e83d99c64e6219560f7e439193fdb786c53c0794245a120026
+  pdf_pages: 64
+  act_pages:
+  - 4
+  - 26
+  characteristics:
+    length: medium
+    has_tables: false
+    structure: capitoli
+    pdf_quality: native
+  notes: '2001 typesetting: accented vowels are extracted as e.g. ''e©'' instead of ''è'' by text-layer
+    parsers. Amended many times since (original version here).'
+- id: l-2013-4
+  title: Disposizioni in materia di professioni non organizzate
+  act: L. 14 gennaio 2013, n. 4
+  url: https://www.gazzettaufficiale.it/eli/gu/2013/01/26/22/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 22 del 26-01-2013
+  normattiva_urn: urn:nir:stato:legge:2013-01-14;4
+  retrieved: '2026-10-26'
+  sha256: e5622f47d9555e91aa313f102577f5bcfcf68e10577de7ae1f3ade1eb9c3df92
+  pdf_pages: 64
+  act_pages:
+  - 5
+  - 10
+  characteristics:
+    length: short
+    has_tables: false
+    structure: articoli-commi
+    pdf_quality: native
+  notes: Short law with articoli-commi.
+- id: dlgs-2005-82
+  title: Codice dell'amministrazione digitale
+  act: D.Lgs. 7 marzo 2005, n. 82
+  url: https://www.gazzettaufficiale.it/eli/gu/2005/05/16/112/so/93/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 112 del 16-05-2005 - Suppl. Ordinario n. 93
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2005-03-07;82
+  retrieved: '2026-10-26'
+  sha256: ad471d76169ea1c8ffdb4a84525aba281ee57465e0ddb2faf67aa54b96e71dc5
+  pdf_pages: 48
+  act_pages:
+  - 5
+  - 48
+  characteristics:
+    length: long
+    has_tables: false
+    structure: capitoli
+    pdf_quality: native
+  notes: '2005 typesetting: accents rendered as apostrophes (e.g. disponibilita''); the trailing pages
+    contain overlapping/garbled text layers. Amended many times since (original version here).'
+- id: dm-2014-55
+  title: Regolamento recante la determinazione dei parametri per la liquidazione dei compensi per la professione
+    forense
+  act: D.M. 10 marzo 2014, n. 55
+  url: https://www.gazzettaufficiale.it/eli/gu/2014/04/02/77/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 77 del 02-04-2014
+  normattiva_urn: urn:nir:ministero.giustizia:decreto:2014-03-10;55
+  retrieved: '2026-10-26'
+  sha256: 703f2c7b82878916ad4178f7f77722520b7b17acd95848cae1f4ec2255a843ea
+  pdf_pages: 72
+  act_pages:
+  - 7
+  - 25
+  characteristics:
+    length: medium
+    has_tables: true
+    structure: capitoli
+    pdf_quality: native
+  notes: Tables of lawyers' fee parameters per value bracket (later replaced by dm-2022-147).
+- id: dm-2022-147
+  title: Regolamento recante modifiche al D.M. 55/2014 (parametri forensi)
+  act: D.M. 13 agosto 2022, n. 147
+  url: https://www.gazzettaufficiale.it/eli/gu/2022/10/08/236/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 236 del 08-10-2022
+  normattiva_urn: urn:nir:ministero.giustizia:decreto:2022-08-13;147
+  retrieved: '2026-10-26'
+  sha256: ad37c90fe06987dca7569b1a4fca19f6e206ad61999306bc4df06695cbd2ffdf
+  pdf_pages: 40
+  act_pages:
+  - 3
+  - 16
+  characteristics:
+    length: medium
+    has_tables: true
+    structure: articoli-commi
+    pdf_quality: native
+  notes: Amends dm-2014-55 and replaces its fee tables.
+- id: dlgs-2018-101
+  title: Disposizioni per l'adeguamento della normativa nazionale al regolamento (UE) 2016/679
+  act: D.Lgs. 10 agosto 2018, n. 101
+  url: https://www.gazzettaufficiale.it/eli/gu/2018/09/04/205/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 205 del 04-09-2018
+  normattiva_urn: urn:nir:stato:decreto.legislativo:2018-08-10;101
+  retrieved: '2026-10-26'
+  sha256: baa9b2eeea6f97591a0927a44ee0f2df5265466d56e471cb2f08010ba1213e97
+  pdf_pages: 136
+  act_pages:
+  - 5
+  - 48
+  characteristics:
+    length: long
+    has_tables: false
+    structure: capitoli
+    pdf_quality: native
+  notes: 'Adapts D.Lgs. 196/2003 to the GDPR: dense cross-references to another act.'
+- id: l-2017-81
+  title: Misure per la tutela del lavoro autonomo non imprenditoriale e per il lavoro agile
+  act: L. 22 maggio 2017, n. 81
+  url: https://www.gazzettaufficiale.it/eli/gu/2017/06/13/135/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 135 del 13-06-2017
+  normattiva_urn: urn:nir:stato:legge:2017-05-22;81
+  retrieved: '2026-10-26'
+  sha256: b1e659e3416a4831dfad007f60949711bfb52360736d1421b3011c041357f692
+  pdf_pages: 120
+  act_pages:
+  - 5
+  - 24
+  characteristics:
+    length: medium
+    has_tables: false
+    structure: capitoli
+    pdf_quality: native
+  notes: Self-employment and 'lavoro agile' (smart working).
+- id: l-1990-241
+  title: Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi
+  act: L. 7 agosto 1990, n. 241
+  url: https://www.gazzettaufficiale.it/eli/gu/1990/08/18/192/sg/pdf
+  source: Gazzetta Ufficiale della Repubblica Italiana (IPZS), PDF del fascicolo
+  license: 'Public domain text (art. 5 L. 633/1941); attribution: Gazzetta Ufficiale / IPZS'
+  publication: GU Serie Generale n. 192 del 18-08-1990
+  normattiva_urn: urn:nir:stato:legge:1990-08-07;241
+  retrieved: '2026-10-26'
+  sha256: 9ee942ec2696ab3b87eb35c9c44593c0495790bcd6c016d0615e9e44f031da59
+  pdf_pages: 24
+  act_pages:
+  - 7
+  - 17
+  characteristics:
+    length: medium
+    has_tables: false
+    structure: capitoli
+    pdf_quality: scanned
+  notes: '1990 issue: scanned image PDF without a text layer. Only OCR-capable parsers can read it. Amended
+    many times since (original version here).'
