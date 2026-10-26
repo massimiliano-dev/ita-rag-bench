@@ -46,3 +46,7 @@ results/tmp-*/
 .DS_Store
 .idea/
 .vscode/
+
+# --- impeccable working files
+.impeccable/review/
+.impeccable/questions/

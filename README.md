@@ -93,8 +93,8 @@ measured once generation exists.
 ## First findings
 
 Run `2026-10-26-mvp` (Apple M5, 32 GB, MPS; all 150 questions, of which 135 answerable; full
-numbers in [`results/2026-10-26-mvp/`](results/2026-10-26-mvp/) and in the leaderboard
-[`site/index.html`](site/index.html)).
+numbers in [`results/2026-10-26-mvp/`](results/2026-10-26-mvp/) and on the results page,
+in Italian and English: <https://massimiliano-dev.github.io/ita-rag-bench/>).
 
 **Caveats first.** The questions are **drafts** (not human-validated) and were drafted by reading the
 PyMuPDF extraction, which may favour PyMuPDF. One domain, 20 documents, a single run. With 135
@@ -159,7 +159,7 @@ uv sync --all-extras            # or plain `uv sync` for the light install (pypd
 uv run itarag corpus fetch      # ~90 MB, polite, sha256-verified
 uv run itarag parse             # sandboxed parsing, cached as JSON
 uv run itarag run --split dev   # writes results/<run-id>/
-uv run itarag site              # builds site/index.html from the latest results
+uv run itarag site              # builds site/index.html (it) and site/en/ (en) from the latest results
 ```
 
 Other commands: `itarag corpus info`, `itarag dataset stats`, `itarag dataset validate`
@@ -188,7 +188,7 @@ corpus/normativo/  manifest.yaml (committed), pdf/ (git-ignored)
 datasets/          questions.jsonl (CC BY 4.0)
 configs/           mvp.yaml, smoke.yaml
 results/<run-id>/  run.json, summary.json, per_question/*.jsonl
-site/index.html    static leaderboard (no external JS)
+site/              static results page, it + en (no JavaScript, self-hosted font)
 ```
 
 ## Security and licences

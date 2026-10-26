@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-26T12:57:28+00:00",
+  "title": "Design System: ita-rag-bench",
+  "extensions": {
+    "colorMeta": {
+      "frame-blue": {
+        "role": "primary",
+        "displayName": "Timetable Blue",
+        "canonical": "#16357a",
+        "tonalRamp": [
+          "#0c1c41",
+          "#143170",
+          "#1d45a0",
+          "#255acf",
+          "#4e7bdf",
+          "#7d9ee8",
+          "#b1c5f1",
+          "#e9effb"
+        ]
+      },
+      "marker-yellow": {
+        "role": "secondary",
+        "displayName": "Highlighter Yellow",
+        "canonical": "#ffd23f",
+        "tonalRamp": [
+          "#4c3b00",
+          "#856600",
+          "#bd9000",
+          "#f5bb00",
+          "#ffce2e",
+          "#ffdb66",
+          "#ffe9a3",
+          "#fff9e5"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#262626",
+          "#424242",
+          "#5e5e5e",
+          "#7a7a7a",
+          "#969696",
+          "#b2b2b2",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#111418",
+        "tonalRamp": [
+          "#20252d",
+          "#37414e",
+          "#4e5c6e",
+          "#66778f",
+          "#8594a8",
+          "#a5b1c0",
+          "#c9d0d9",
+          "#f0f2f4"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#4a525c",
+        "tonalRamp": [
+          "#22262a",
+          "#3b4249",
+          "#545d69",
+          "#6d7988",
+          "#8b95a2",
+          "#aab2bb",
+          "#ccd1d6",
+          "#f1f2f4"
+        ]
+      },
+      "frame-ink-soft": {
+        "role": "neutral",
+        "displayName": "Frame Ink Soft",
+        "canonical": "#c9d6f0",
+        "tonalRamp": [
+          "#111f3c",
+          "#1d3668",
+          "#294d94",
+          "#3563c0",
+          "#5b83d2",
+          "#87a4de",
+          "#b7c8eb",
+          "#ebf0f9"
+        ]
+      },
+      "rule-hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#c9ced6",
+        "tonalRamp": [
+          "#21252b",
+          "#39404b",
+          "#515b6b",
+          "#6a778b",
+          "#8893a5",
+          "#a8b0bd",
+          "#cbd0d7",
+          "#f1f2f4"
+        ]
+      },
+      "tint-blue": {
+        "role": "neutral",
+        "displayName": "Blue Tint",
+        "canonical": "#eaf0fa",
+        "tonalRamp": [
+          "#0f203e",
+          "#19386b",
+          "#245098",
+          "#2f68c6",
+          "#5686d7",
+          "#83a7e2",
+          "#b5caed",
+          "#eaf0fa"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page title only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles on a 2px ink rule."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Individual finding headings."
+      },
+      "finding-headline": {
+        "displayName": "Finding Headline",
+        "purpose": "First-viewport conclusion links with train codes."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Opening paragraph."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose within the 40rem measure."
+      },
+      "table": {
+        "displayName": "Table",
+        "purpose": "All data tables, tabular figures, right-aligned numerals."
+      },
+      "board-figure": {
+        "displayName": "Board Figure",
+        "purpose": "recall@5 on the departures board."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Train codes."
+      },
+      "note": {
+        "displayName": "Note",
+        "purpose": "Margin notes, table notes, legend, footer."
+      },
+      "terminal": {
+        "displayName": "Terminal",
+        "purpose": "Reproduce commands only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "highest-cell-ring",
+        "value": "inset 0 0 0 2px #111418",
+        "purpose": "Ink ring around the timetable's yellow highest-observed cell, so the marker does not rely on colour alone. Not elevation."
+      }
+    ],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "640px",
+        "purpose": "Gutters 1.5rem to 1rem, smaller lead, narrower sticky stop column."
+      },
+      {
+        "name": "margin",
+        "value": "1100px",
+        "purpose": "Opening and timetable sections gain the right margin column (board, sticky legend)."
+      }
+    ],
+    "focus": {
+      "value": "outline: 3px solid #16357a; outline-offset: 2px",
+      "onFrame": "outline-color: #ffd23f inside the blue masthead"
+    },
+    "honesty": {
+      "noise": 0.07,
+      "marks": {
+        "†": "draft data (LLM-assisted, unvalidated questions)",
+        "‡": "95% interval of about ±7 points"
+      },
+      "marker": "At most one yellow cell per table; timetable labels it 'highest observed'; other tables mark only a value separable by more than NOISE, else an explicit tie note."
+    },
+    "font": {
+      "family": "Archivo",
+      "file": "src/itaragbench/site_assets/fonts/archivo-latin-var.woff2",
+      "axes": "wght 100-900, wdth 62-125",
+      "license": "OFL-1.1"
+    }
+  },
+  "components": [
+    {
+      "name": "Train Code",
+      "kind": "chip",
+      "refersTo": "train-code",
+      "description": "Outlined plate for a line (MU·FX) or train (MU·FX·HM); links to its timetable cell.",
+      "html": "<a class=\"ds-code\" href=\"#cell-mu-fx-hm\">MU·FX·HM</a> <a class=\"ds-code\" href=\"#train-mu-st\">MU·ST</a>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-code{display:inline-block;padding:0 .4rem;border:1.5px solid currentColor;border-radius:2px;font-weight:700;font-stretch:70%;font-size:.9375rem;letter-spacing:.03em;line-height:1.5;font-variant-numeric:tabular-nums;text-decoration:none;color:var(--frame);} .ds-code:hover{background:var(--tint);} .ds-code:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "masthead",
+      "description": "Blue timetable cover with run metadata, † mark, plain language link and section nav.",
+      "html": "<header class=\"ds-mast\"><div class=\"ds-mast-row\"><a class=\"ds-word\" href=\"#\">ita-rag-bench</a><p class=\"ds-valid\"><span>Run <b>2026-10-26-mvp</b></span><span>Valid from <b>October 26, 2026</b></span><span>20 acts, 700 pages, 150 questions<a class=\"ds-mk\" href=\"#draft\">†</a></span></p><a class=\"ds-lang\" href=\"#\">Italiano</a></div><nav><ul><li><a href=\"#\">Findings</a></li><li><a href=\"#\">Timetable</a></li><li><a href=\"#\">By question type</a></li><li><a href=\"#\">Costs</a></li></ul></nav></header>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-mast{background:var(--frame);color:var(--frame-ink);} .ds-mast-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 2rem;padding:1.25rem 1.5rem .75rem;} .ds-word{color:var(--frame-ink);font-weight:800;font-stretch:70%;font-size:1.75rem;text-decoration:none;letter-spacing:-.01em;} .ds-valid{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;margin:0 auto 0 0;color:var(--frame-ink-2);font-size:.9375rem;} .ds-valid b{color:var(--frame-ink);font-weight:600;} .ds-mk{color:var(--marker);text-decoration:none;font-weight:700;margin-left:.15rem;} .ds-lang{color:var(--frame-ink);font-weight:600;text-underline-offset:3px;} .ds-mast nav{border-top:1px solid rgb(255 255 255 / .25);} .ds-mast ul{display:flex;margin:0;padding:0 1.5rem;list-style:none;overflow-x:auto;} .ds-mast nav a{display:block;padding:.6rem 1rem .6rem 0;margin-right:1rem;color:var(--frame-ink);font-stretch:85%;font-weight:600;white-space:nowrap;text-decoration:none;} .ds-mast nav a:hover{text-decoration:underline;} .ds-mast :focus-visible{outline:3px solid var(--marker);outline-offset:2px;}"
+    },
+    {
+      "name": "Departures Board",
+      "kind": "card",
+      "refersTo": "board-header",
+      "description": "The three highest configurations with a tie note and footnote margin notes.",
+      "html": "<div class=\"ds-board\"><h2>The three highest configurations</h2><table><thead><tr><th>Train</th><th>Service</th><th class=\"n\">recall@5<sup class=\"ds-mk\">‡</sup></th><th class=\"n\">Ceiling</th></tr></thead><tbody><tr><td><span class=\"ds-c\">MU·FX·HM</span></td><td>Hybrid bge-m3</td><td class=\"n f\">0.836</td><td class=\"n s\">0.939</td></tr><tr><td><span class=\"ds-c\">MU·ST·HM</span></td><td>Hybrid bge-m3</td><td class=\"n f\">0.802</td><td class=\"n s\">0.939</td></tr><tr><td><span class=\"ds-c\">MU·ST·HE</span></td><td>Hybrid e5-base</td><td class=\"n f\">0.795</td><td class=\"n s\">0.939</td></tr></tbody></table><p>The three differ by 4.1 points, less than the ±7 interval: none is significantly better.</p></div>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-board{max-width:30rem;} .ds-board h2{margin:0;padding:.6rem .75rem;background:var(--frame);color:var(--frame-ink);font-size:1.25rem;font-stretch:75%;font-weight:750;} .ds-board table{width:100%;border-collapse:collapse;font-stretch:87%;} .ds-board th,.ds-board td{padding:.55rem .5rem;text-align:left;vertical-align:middle;} .ds-board thead th{font-size:.8125rem;font-weight:600;color:var(--ink-2);border-bottom:2px solid var(--rule-strong);} .ds-board tbody tr{border-bottom:1px solid var(--rule);} .ds-board .n{text-align:right;font-variant-numeric:tabular-nums;} .ds-board .f{font-size:1.375rem;font-weight:700;font-stretch:75%;} .ds-board .s{color:var(--ink-2);} .ds-board p{margin:.75rem 0 0;font-size:.8125rem;color:var(--ink-2);} .ds-mk{font-weight:700;color:var(--frame);font-size:.75em;} .ds-c{display:inline-block;padding:0 .4rem;border:1.5px solid currentColor;border-radius:2px;font-weight:700;font-stretch:70%;font-size:.9375rem;letter-spacing:.03em;color:var(--frame);}"
+    },
+    {
+      "name": "Timetable",
+      "kind": "custom",
+      "refersTo": "table-cell-highest",
+      "description": "Stops as row groups, trains as columns with vertical hairlines, blue line strip, one yellow highest-observed cell.",
+      "html": "<p class=\"ds-strip\">Table 1 · Line PDF › chunk › search · 3 trains</p><table class=\"ds-tt\"><thead><tr><th class=\"c\">Stop / service</th><th><span class=\"ds-c\">MU·FX</span></th><th><span class=\"ds-c\">MU·ST</span></th><th><span class=\"ds-c\">DL·FX</span></th></tr></thead><tbody><tr class=\"ceil\"><th>Stop 1 · Parsing and chunking</th><td>0.939</td><td>0.939</td><td>0.901</td></tr><tr class=\"grp\"><th colspan=\"4\">Stop 2 · Search: recall@5<sup class=\"ds-mk\">‡</sup></th></tr><tr><th>Hybrid bge-m3</th><td class=\"best\">0.836</td><td>0.802</td><td>0.790</td></tr><tr><th>BM25</th><td>0.781</td><td>0.774</td><td>0.760</td></tr><tr class=\"lost\"><th>Lost in search</th><td>0.103</td><td>0.137</td><td>0.111</td></tr></tbody></table>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-strip{margin:0 0 .75rem;padding:.4rem .75rem;background:var(--frame);color:var(--frame-ink);font-weight:600;font-stretch:80%;font-size:.9375rem;} .ds-tt{border-collapse:collapse;font-stretch:87%;width:100%;} .ds-tt th,.ds-tt td{padding:.5rem .75rem;text-align:right;vertical-align:top;} .ds-tt tbody th,.ds-tt .c{text-align:left;font-weight:600;} .ds-tt thead th{border-bottom:2px solid var(--rule-strong);vertical-align:bottom;} .ds-tt td,.ds-tt thead th:not(.c){border-left:1px solid var(--rule);} .ds-tt td{font-variant-numeric:tabular-nums;} .ds-tt tbody tr{border-bottom:1px solid var(--rule);} .ds-tt .ceil{background:var(--tint);} .ds-tt .grp th{padding-top:1rem;font-weight:700;font-stretch:80%;border-bottom:1px solid var(--rule-strong);} .ds-tt .lost{border-top:2px solid var(--rule-strong);color:var(--ink-2);} .ds-tt td.best{background:var(--marker);box-shadow:inset 0 0 0 2px var(--ink);} .ds-tt td:hover{background:var(--tint);} .ds-mk{font-weight:700;color:var(--frame);font-size:.75em;} .ds-c{display:inline-block;padding:0 .4rem;border:1.5px solid currentColor;border-radius:2px;font-weight:700;font-stretch:70%;font-size:.9375rem;letter-spacing:.03em;color:var(--frame);}"
+    },
+    {
+      "name": "Draft Notice",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "The † anchor: draft questions and the ±7 interval, between an ink rule and a hairline.",
+      "html": "<p class=\"ds-draft\" id=\"draft\"><span class=\"ds-mk\">†</span><span>All 150 questions are LLM-assisted drafts, not yet validated by people. A single configuration's recall@5 has a 95% interval of about ±7 points: smaller differences are noise.</span></p>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-draft{display:flex;gap:.75rem;margin:0;padding:1rem 0;border-top:2px solid var(--rule-strong);border-bottom:1px solid var(--rule);font-size:.9375rem;color:var(--ink-2);max-width:40rem;} .ds-draft .ds-mk{font-weight:700;color:var(--frame);font-size:1.25rem;line-height:1.2;}"
+    },
+    {
+      "name": "Terminal Block",
+      "kind": "custom",
+      "refersTo": "terminal-block",
+      "description": "Reproduce commands.",
+      "html": "<pre class=\"ds-pre\">uv run itarag run --config configs/mvp.yaml\nuv run itarag site</pre>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-pre{margin:0;padding:1rem 1.25rem;overflow-x:auto;background:var(--tint);border-top:2px solid var(--frame);font-family:var(--face-code);font-size:.875rem;line-height:1.6;} .ds-pre:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "",
+      "description": "Links are underlined blue text; the page has no buttons.",
+      "html": "<p class=\"ds-p\">Full results, question by question: <a class=\"ds-a\" href=\"#\">results/2026-10-26-mvp</a></p>",
+      "css": ":host{--paper:#ffffff;--ink:#111418;--ink-2:#4a525c;--frame:#16357a;--frame-ink:#ffffff;--frame-ink-2:#c9d6f0;--rule:#c9ced6;--rule-strong:#111418;--tint:#eaf0fa;--marker:#ffd23f;--focus:#16357a;--face:'Archivo',system-ui,sans-serif;--face-code:ui-monospace,'SF Mono',Menlo,monospace;font-family:var(--face);color:var(--ink);} .ds-p{font-size:1.0625rem;line-height:1.6;} .ds-a{color:var(--frame);text-underline-offset:3px;text-decoration-thickness:1px;} .ds-a:hover{text-decoration-thickness:2px;} .ds-a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Official Timetable",
+    "overview": "The leaderboard is an Italian railway timetable (Orario ufficiale FS) for a benchmark run. Every pipeline configuration is a train with a unique code, its stops are parsing and chunking, then search, and the grid shows how much recall is still on board at each stop. A blue masthead frames white paper and black ink; a condensed grotesk with tabular figures sets a ruled grid; footnote marks carry uncertainty; one yellow highlighter stroke per table points at the answer.\n\nDensity is that of a printed timetable: tight ruled rows, hairline columns, notes in the margin, nothing decorative. Honesty is part of the visual system, not just the copy. Emphasis (bold, yellow) is earned by a margin larger than the measurement noise, and doubt (draft questions, confidence intervals) is spoken in footnote marks, never in colour. Conclusions come first in a reading column; the full grid is one link away, addressed by the same train codes used in the prose.\n\nThe page is static HTML with no JavaScript; the language switch is a plain link between `/` (Italian) and `/en/` (English). The font is self-hosted; nothing loads from another host.",
+    "keyCharacteristics": [
+      "Blue frame (masthead, board header, line strip, footer) around white paper and black ink.",
+      "One condensed variable grotesk (Archivo, width axis 70–87%) for everything but terminal commands.",
+      "Train codes `line·service` (MU·FX·HM) used identically in text, tables and anchors.",
+      "Ruled tables: 2px ink rule under headers, 1px hairlines between rows, vertical hairlines between trains.",
+      "Footnote marks † (draft data) and ‡ (±7 point interval) keyed into headers and notes.",
+      "At most one yellow marker per table, labelled as the highest observed value."
+    ],
+    "rules": [
+      {
+        "name": "The One Marker Rule",
+        "body": "Each table carries at most one yellow cell. In the timetable it is the highest observed value and the notes say so (\"highest observed\"); in every other table it appears only when the top value beats the runner-up by more than the noise interval (NOISE = 0.07, 7 points). Otherwise no cell is yellow and an explicit tie note says why.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Colour For Doubt Rule",
+        "body": "Uncertainty and draft status are never coloured, faded or badged. They are footnote marks: † for draft (LLM-assisted, unvalidated) questions, ‡ for the ±7 point 95% interval, attached to the header or figure they qualify and explained in the notes beneath.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Figures Rule",
+        "body": "Every number that can sit above another number uses tabular figures and right alignment, so decimals line up down a column like departure times.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Face Rule",
+        "body": "Hierarchy comes from width and weight on Archivo's axes, not from a second family. Monospace is reserved for shell commands.",
+        "section": "typography"
+      },
+      {
+        "name": "The Printed Depth Rule",
+        "body": "Separate things with rules and tints, never with shadows or floating cards.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do give every configuration its unique train code (line·service, e.g. MU·FX·HM) and use it identically in prose, boards, tables and anchors.",
+      "Do mark a value bold or yellow only when it beats the runner-up by more than 7 points (NOISE = 0.07); otherwise write an explicit tie note.",
+      "Do keep yellow to one cell per table and label it as the highest observed value.",
+      "Do attach † (draft data) and ‡ (±7 interval) to the headers or figures they qualify, with the explanation in the notes.",
+      "Do lay out data as a timetable: stops as row groups, trains as columns with vertical hairlines, the blue line strip above.",
+      "Do keep the first viewport to title, lead, finding headlines with codes, and the three-highest board with its margin notes.",
+      "Do ship static HTML with real tables and headers, a self-hosted font, and the language switch as a plain link."
+    ],
+    "donts": [
+      "Don't colour, fade or badge uncertainty or draft status; use footnote marks.",
+      "Don't heat-map tables or use more than one yellow marker in a table.",
+      "Don't rank, bold or call a winner on differences within the ±7 point interval.",
+      "Don't add JavaScript, sorting widgets or external hosts.",
+      "Don't add drop shadows, rounded cards or a second typeface for display."
+    ]
+  }
+}

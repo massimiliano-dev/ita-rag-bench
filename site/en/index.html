@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ita-rag-bench · results</title>
+<meta name="description" content="A benchmark that measures the whole retrieval pipeline on laws and decrees from the Italian Official Gazette: text extraction from the PDF, chunking, embeddings and search. Not just the embedding.">
+<meta name="color-scheme" content="light">
+<link rel="alternate" hreflang="it" href="../">
+<link rel="preload" href="../assets/fonts/archivo-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<style>
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/archivo-latin-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+:root {
+  --paper: #ffffff;
+  --ink: #111418;
+  --ink-2: #4a525c;
+  --frame: #16357a;
+  --frame-ink: #ffffff;
+  --frame-ink-2: #c9d6f0;
+  --rule: #c9ced6;
+  --rule-strong: #111418;
+  --tint: #eaf0fa;
+  --marker: #ffd23f;
+  --focus: #16357a;
+  --face: 'Archivo', system-ui, sans-serif;
+  --face-code: ui-monospace, 'SF Mono', Menlo, monospace;
+  --measure: 40rem;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--face);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+::selection { background: var(--marker); color: var(--ink); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+a { color: var(--frame); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+h1, h2, h3 { font-stretch: 75%; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.num, td.num { font-variant-numeric: tabular-nums; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--marker); color: var(--ink); padding: .5rem 1rem; }
+.skip:focus { left: 1rem; z-index: 2; }
+
+/* Masthead: the timetable cover */
+.masthead { background: var(--frame); color: var(--frame-ink); }
+.masthead-row {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 2rem;
+  max-width: 76rem; margin: 0 auto; padding: 1.25rem 1.5rem .75rem;
+}
+.wordmark { color: var(--frame-ink); font-weight: 800; font-stretch: 70%; font-size: 1.75rem; text-decoration: none; letter-spacing: -.01em; }
+.validity { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-right: auto; color: var(--frame-ink-2); font-size: .9375rem; }
+.validity b { color: var(--frame-ink); font-weight: 600; }
+.validity .mark, .masthead a.mark { color: var(--marker); text-decoration: none; margin-left: .15rem; }
+.lang { color: var(--frame-ink); font-weight: 600; }
+.masthead nav { border-top: 1px solid rgb(255 255 255 / .25); }
+.masthead nav ul {
+  display: flex; gap: 0; max-width: 76rem; margin: 0 auto; padding: 0 1.5rem;
+  list-style: none; overflow-x: auto; scrollbar-width: none;
+}
+.masthead nav a {
+  display: block; padding: .6rem 1rem .6rem 0; margin-right: 1rem; color: var(--frame-ink);
+  font-stretch: 85%; font-weight: 600; white-space: nowrap; text-decoration: none;
+}
+.masthead nav a:hover { text-decoration: underline; }
+.masthead :focus-visible { outline-color: var(--marker); }
+
+/* Reading column */
+main { max-width: 76rem; margin: 0 auto; padding: 0 1.5rem 4rem; }
+.opening-text, main > section:not(.wide) { max-width: var(--measure); }
+.opening { padding: 3rem 0 1rem; display: grid; gap: 2.5rem; }
+@media (min-width: 1100px) {
+  .opening { grid-template-columns: minmax(0, var(--measure)) minmax(20rem, 1fr); gap: 4rem; align-items: start; }
+}
+h1 { font-size: clamp(2.25rem, 4vw, 3.25rem); font-weight: 800; letter-spacing: -.015em; max-width: 20ch; }
+
+/* First-viewport board: recommended departures */
+/* Headed like a station departures board: a blue band, then the rows. */
+.departures h2 {
+  border: 0; margin: 0; padding: .6rem .75rem;
+  background: var(--frame); color: var(--frame-ink); font-size: 1.25rem;
+}
+.departures table { width: 100%; }
+.departures th, .departures td { padding: .55rem .5rem; vertical-align: middle; }
+.departures thead th { font-size: .8125rem; font-weight: 600; color: var(--ink-2); }
+.departures tbody td.num { font-size: 1.375rem; font-weight: 700; font-stretch: 75%; }
+.departures tbody td.num:last-child { font-size: 1rem; font-weight: 500; color: var(--ink-2); }
+.departures p { margin-top: .75rem; font-size: .8125rem; color: var(--ink-2); }
+.lead { margin-top: 1.25rem; font-size: 1.25rem; line-height: 1.5; color: var(--ink-2); }
+.draft {
+  display: flex; gap: .75rem; margin-top: 2rem; padding: 1rem 0;
+  border-top: 2px solid var(--rule-strong); border-bottom: 1px solid var(--rule);
+  font-size: .9375rem; color: var(--ink-2);
+}
+.mark { font-weight: 700; color: var(--frame); }
+.draft .mark { font-size: 1.25rem; line-height: 1.2; }
+section { margin-top: 4rem; }
+/* Data tables get the width they need; prose sections keep the reading measure. */
+main > section#categories, main > section#documents { max-width: 60rem; }
+h2 {
+  font-size: 1.875rem; font-weight: 750; padding-top: .75rem;
+  border-top: 2px solid var(--rule-strong); margin-bottom: 1rem;
+}
+.intro { color: var(--ink-2); margin-bottom: 1.5rem; }
+
+/* Opening: finding headlines, then the board with its margin notes */
+.headlines { list-style: none; margin: 1.75rem 0 0; padding: 0; border-top: 2px solid var(--rule-strong); }
+.headlines > li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; padding: .65rem 0; border-bottom: 1px solid var(--rule); }
+.headlines > li > a { color: var(--ink); font-weight: 700; font-stretch: 80%; font-size: 1.125rem; line-height: 1.3; text-decoration: none; flex: 1 1 18rem; }
+.headlines > li > a:hover { text-decoration: underline; }
+.verdict { margin-top: .75rem; font-size: 1rem; line-height: 1.5; }
+.margin-notes { list-style: none; margin: 1.25rem 0 0; padding: .75rem 0 0; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--ink-2); display: grid; gap: .5rem; }
+.margin-notes .mark { margin-right: .25rem; }
+
+/* Sections with a margin column: notes live where a timetable puts them */
+@media (min-width: 1100px) {
+  .with-margin { display: grid; grid-template-columns: minmax(0, var(--measure)) minmax(16rem, 1fr); gap: 4rem; align-items: start; }
+  .with-margin .margin { position: sticky; top: 1.5rem; padding-top: 4.5rem; }
+}
+/* Below the margin breakpoint the legend is shown once, under the timetable. */
+@media (max-width: 1099px) { .with-margin .margin { display: none; } }
+.legend-title { font-weight: 700; font-stretch: 80%; margin-top: 1.25rem; }
+.legend { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: .15rem 1rem; font-size: .875rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.tie-note { margin-top: .75rem; font-size: .9375rem; }
+sup.mark { font-size: .75em; margin-left: .1em; }
+
+/* Findings */
+.findings { list-style: none; margin: 0; padding: 0; counter-reset: f; }
+.finding { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
+.finding h3 { font-size: 1.375rem; font-weight: 700; margin-bottom: .5rem; }
+.finding p + .check { margin-top: .75rem; }
+.check { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .875rem; color: var(--ink-2); }
+.codes { display: flex; flex-wrap: wrap; gap: .375rem; margin: 0; padding: 0; list-style: none; }
+
+/* Train codes: the same everywhere */
+.code {
+  display: inline-block; padding: 0 .4rem; border: 1.5px solid currentColor; border-radius: 2px;
+  font-weight: 700; font-stretch: 70%; font-size: .9375rem; letter-spacing: .03em; line-height: 1.5;
+  font-variant-numeric: tabular-nums; text-decoration: none; color: var(--frame);
+}
+a.code:hover { background: var(--tint); }
+
+/* Tables */
+.table-scroll { overflow-x: auto; margin: 0 -1.5rem; padding: 0 1.5rem; }
+.table-scroll:focus-visible { outline-offset: -3px; }
+table { border-collapse: collapse; font-stretch: 87%; }
+th, td { padding: .5rem .75rem; text-align: left; vertical-align: top; }
+td.num { text-align: right; }
+thead th { font-weight: 700; border-bottom: 2px solid var(--rule-strong); vertical-align: bottom; white-space: nowrap; }
+th.num { text-align: right; }
+tbody th { font-weight: 600; }
+tbody tr { border-bottom: 1px solid var(--rule); }
+.strong { font-weight: 800; }
+td.best { background: var(--marker); }
+.ruled { min-width: 100%; }
+
+/* The timetable */
+.timetable { min-width: 56rem; width: 100%; }
+.timetable thead th { text-align: right; }
+.timetable thead th.corner { text-align: left; }
+.timetable thead .code { display: block; margin-left: auto; width: max-content; }
+.timetable .sub { display: block; margin-top: .25rem; font-weight: 400; font-size: .75rem; color: var(--ink-2); line-height: 1.3; }
+.timetable tbody th, .timetable thead th:first-child {
+  position: sticky; left: 0; background: var(--paper); min-width: 13rem; z-index: 1;
+}
+.timetable tbody th .unit { display: block; font-weight: 400; font-size: .75rem; color: var(--ink-2); }
+.timetable tr.ceiling { background: var(--tint); }
+.timetable tr.ceiling th { background: var(--tint); }
+.timetable tr.lost { border-top: 2px solid var(--rule-strong); color: var(--ink-2); }
+.timetable tr.group th { position: static; background: var(--paper); padding-top: 1rem; font-weight: 700; font-stretch: 80%; border-bottom: 1px solid var(--rule-strong); }
+/* Vertical hairlines between trains: the timetable's own grid */
+.timetable td, .timetable thead th:not(.corner) { border-left: 1px solid var(--rule); }
+.timetable td:target { outline: 3px solid var(--frame); outline-offset: -3px; background: var(--tint); }
+.line-strip { margin: 0 0 .75rem; padding: .4rem .75rem; background: var(--frame); color: var(--frame-ink); font-weight: 600; font-stretch: 80%; font-size: .9375rem; }
+.timetable td.best { box-shadow: inset 0 0 0 2px var(--ink); }
+
+
+.notes { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; font-size: .875rem; color: var(--ink-2); }
+.notes .hl { display: inline-block; width: 1.75rem; height: .9rem; background: var(--marker); vertical-align: -.1rem; margin-right: .25rem; }
+
+
+pre {
+  margin: 1rem 0; padding: 1rem 1.25rem; overflow-x: auto;
+  background: var(--tint); border-top: 2px solid var(--frame);
+  font-family: var(--face-code); font-size: .875rem; line-height: 1.6;
+}
+#method p + p { margin-top: 1rem; }
+
+.footer { background: var(--frame); color: var(--frame-ink-2); }
+.footer p { max-width: 76rem; margin: 0 auto; padding: 1rem 1.5rem 0; font-size: .875rem; }
+.footer p:last-child { padding-bottom: 1.5rem; }
+.footer a { color: var(--frame-ink); }
+
+@media (max-width: 640px) {
+  .masthead-row { padding: 1rem 1rem .5rem; }
+  .masthead nav ul, main { padding-left: 1rem; padding-right: 1rem; }
+  .table-scroll { margin: 0 -1rem; padding: 0 1rem; }
+  .opening { padding-top: 2.25rem; }
+  .lead { font-size: 1.125rem; }
+  .timetable tbody th, .timetable thead th:first-child { min-width: 9.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+@media print {
+  .masthead, .footer { background: none; color: var(--ink); }
+  .masthead a, .footer a, .validity b { color: var(--ink); }
+  .masthead nav, .skip { display: none; }
+  .table-scroll { overflow: visible; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="masthead-row">
+    <a class="wordmark" href="../en/">ita-rag-bench</a>
+    <p class="validity"><span>Run <b class="num">2026-10-26-mvp</b></span>
+      <span>Valid from <b>October 26, 2026</b></span>
+      <span>20 acts, 700 pages, 150 questions<a class="mark" href="#draft" aria-label="draft questions, not yet validated">†</a></span></p>
+    <a class="lang" href="../" hreflang="it" lang="it">Italiano</a>
+  </div>
+  <nav aria-label="Sections"><ul><li><a href="#findings">Findings</a></li><li><a href="#timetable">Timetable</a></li><li><a href="#categories">By question type</a></li><li><a href="#documents">By document</a></li><li><a href="#costs">Costs</a></li><li><a href="#method">Method</a></li></ul></nav>
+</header>
+<main id="main">
+  <div class="opening">
+    <div class="opening-text">
+      <h1>What really matters for RAG on Italian documents</h1>
+      <p class="lead">A benchmark that measures the whole retrieval pipeline on laws and decrees from the Italian Official Gazette: text extraction from the PDF, chunking, embeddings and search. Not just the embedding.</p>
+      <ol class="headlines"><li><a href="#finding-1">The embedding matters as much as chunking. The parser, on average, slightly less.</a><ul class="codes"><li><a class="code" href="#cell-mu-st-e5">MU·ST·E5</a></li><li><a class="code" href="#cell-mu-st-m3">MU·ST·M3</a></li><li><a class="code" href="#cell-mu-rc-m3">MU·RC·M3</a></li></ul></li><li><a href="#finding-2">When parsing fails, it fails completely.</a><ul class="codes"><li><a class="code" href="#cell-py-fx-m3">PY·FX·M3</a></li><li><a class="code" href="#cell-mu-fx-m3">MU·FX·M3</a></li><li><a class="code" href="#cell-dl-fx-m3">DL·FX·M3</a></li></ul></li><li><a href="#finding-3">Parsing and chunking set a ceiling before any embedding runs.</a><ul class="codes"><li><a class="code" href="#train-mu-fx">MU·FX</a></li><li><a class="code" href="#train-mu-st">MU·ST</a></li></ul></li><li><a href="#finding-4">BM25 is a hard baseline to beat; hybrid leads, but narrowly.</a><ul class="codes"><li><a class="code" href="#cell-mu-fx-bm">MU·FX·BM</a></li><li><a class="code" href="#cell-mu-fx-m3">MU·FX·M3</a></li><li><a class="code" href="#cell-mu-fx-hm">MU·FX·HM</a></li></ul></li></ol>
+    </div>
+    <aside class="departures" aria-labelledby="departures-h">
+  <h2 id="departures-h">The three highest configurations</h2>
+  <table>
+    <thead><tr><th scope="col">Train</th><th scope="col">Service</th>
+    <th scope="col" class="num">recall@5<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Ceiling</th></tr></thead>
+    <tbody><tr><th scope="row"><a class="code" href="#cell-mu-fx-hm">MU·FX·HM</a></th><td>Hybrid bge-m3</td><td class="num">0.836</td><td class="num">0.939</td></tr><tr><th scope="row"><a class="code" href="#cell-mu-st-hm">MU·ST·HM</a></th><td>Hybrid bge-m3</td><td class="num">0.802</td><td class="num">0.939</td></tr><tr><th scope="row"><a class="code" href="#cell-mu-st-he">MU·ST·HE</a></th><td>Hybrid e5-base</td><td class="num">0.795</td><td class="num">0.939</td></tr></tbody>
+  </table>
+  <p class="verdict">The three differ by 4.1 points, less than the ±7 interval: with this data none is significantly better than the others.</p>
+  <ul class="margin-notes">
+    <li id="draft"><span class="mark" aria-hidden="true">†</span> All 150 questions are drafts written with LLM help and not yet validated by people. With 135 answerable questions, one configuration&#x27;s recall@5 has a 95% interval of about ±7 points: smaller differences are noise.</li>
+    <li><span class="mark" aria-hidden="true">‡</span> 95% interval of about ±7 points per cell.</li>
+  </ul>
+</aside>
+  </div>
+  <section id="findings" class="wide with-margin" aria-labelledby="findings-h">
+  <div class="column"><h2 id="findings-h">Findings</h2><ol class="findings"><li class="finding" id="finding-1"><h3>The embedding matters as much as chunking. The parser, on average, slightly less.</h3><p>All else equal, moving from e5-base to bge-m3 is worth +9.0 points of recall@5 (95% CI +5.0 to +13.5). Moving from the recursive chunker to the structure-aware one (articles and paragraphs) is worth +8.7 (+4.6 to +13.2). Moving from pypdf to PyMuPDF is worth +6.6 (+3.0 to +10.2). None of the three factors is negligible.</p><div class="check"><span>Check in the timetable:</span><ul class="codes"><li><a class="code" href="#cell-mu-st-e5">MU·ST·E5</a></li><li><a class="code" href="#cell-mu-st-m3">MU·ST·M3</a></li><li><a class="code" href="#cell-mu-rc-m3">MU·RC·M3</a></li></ul></div></li><li class="finding" id="finding-2"><h3>When parsing fails, it fails completely.</h3><p>On Legislative Decree 231/2001, pypdf and Docling return glyph codes instead of text: recall@5 0.00, against 0.90 with PyMuPDF. On Law 241/1990, a scan, pypdf and PyMuPDF score 0.00 and Docling with OCR 0.71. Without these two documents the three parsers are within 4 points of each other. Check first that the extracted text is readable.</p><div class="check"><span>Check in the timetable:</span><ul class="codes"><li><a class="code" href="#cell-py-fx-m3">PY·FX·M3</a></li><li><a class="code" href="#cell-mu-fx-m3">MU·FX·M3</a></li><li><a class="code" href="#cell-dl-fx-m3">DL·FX·M3</a></li></ul></div></li><li class="finding" id="finding-3"><h3>Parsing and chunking set a ceiling before any embedding runs.</h3><p>Between 6% and 16% of the reference passages are not contained whole in any chunk, so no retriever can find them. The structure-aware chunker raises the ceiling on single-paragraph questions (0.954 against 0.908) but lowers it on table questions (0.773 against 0.864).</p><div class="check"><span>Check in the timetable:</span><ul class="codes"><li><a class="code" href="#train-mu-fx">MU·FX</a></li><li><a class="code" href="#train-mu-st">MU·ST</a></li></ul></div></li><li class="finding" id="finding-4"><h3>BM25 is a hard baseline to beat; hybrid leads, but narrowly.</h3><p>BM25 on PyMuPDF with fixed chunks reaches 0.774, level with the best dense configuration (0.780). The highest observed value is hybrid BM25 + bge-m3 on MU·FX, 0.836 (95% CI 0.78 to 0.90): it cannot be told apart from the two configurations that follow it. On table questions BM25 beats dense retrieval (0.73 against 0.50).</p><div class="check"><span>Check in the timetable:</span><ul class="codes"><li><a class="code" href="#cell-mu-fx-bm">MU·FX·BM</a></li><li><a class="code" href="#cell-mu-fx-m3">MU·FX·M3</a></li><li><a class="code" href="#cell-mu-fx-hm">MU·FX·HM</a></li></ul></div></li></ol></div>
+  <aside class="margin" aria-label="How to read the codes"><p class="legend-title">How to read the codes</p><ul class="legend"><li>PY = pypdf</li><li>MU = pymupdf</li><li>DL = docling</li><li>FX = fixed</li><li>RC = recursive</li><li>ST = structure</li><li>BM = BM25</li><li>E5 = Dense e5-base</li><li>M3 = Dense bge-m3</li><li>HE = Hybrid e5-base</li><li>HM = Hybrid bge-m3</li></ul></aside>
+</section>
+  <section id="timetable" class="wide" aria-labelledby="timetable-h">
+  <h2 id="timetable-h">Timetable: how much recall is left at each stop</h2>
+  <p class="intro">Each column is a line, a parser and chunker pair; each train is a line with a search service and has a unique code, for example MU·FX·HM. The first stop, parsing and chunking together, shows the ceiling: the share of reference passages that end up whole in at least one chunk. At the second stop each row is an alternative search service. The last row is the recall lost in search.</p>
+  <p class="line-strip">Table 1 · Line PDF › chunk › search · 9 trains, 5 services</p>
+  <div class="table-scroll" role="region" aria-labelledby="timetable-h" tabindex="0">
+    <table class="timetable">
+      <thead><tr><th scope="col" class="corner">Stop / service</th><th scope="col" id="train-py-fx"><span class="code">PY·FX</span><span class="sub">pypdf<br>fixed</span></th><th scope="col" id="train-py-rc"><span class="code">PY·RC</span><span class="sub">pypdf<br>recursive</span></th><th scope="col" id="train-py-st"><span class="code">PY·ST</span><span class="sub">pypdf<br>structure</span></th><th scope="col" id="train-mu-fx"><span class="code">MU·FX</span><span class="sub">pymupdf<br>fixed</span></th><th scope="col" id="train-mu-rc"><span class="code">MU·RC</span><span class="sub">pymupdf<br>recursive</span></th><th scope="col" id="train-mu-st"><span class="code">MU·ST</span><span class="sub">pymupdf<br>structure</span></th><th scope="col" id="train-dl-fx"><span class="code">DL·FX</span><span class="sub">docling<br>fixed</span></th><th scope="col" id="train-dl-rc"><span class="code">DL·RC</span><span class="sub">docling<br>recursive</span></th><th scope="col" id="train-dl-st"><span class="code">DL·ST</span><span class="sub">docling<br>structure</span></th></tr></thead>
+      <tbody><tr class="ceiling"><th scope="row">Stop 1 · Parsing and chunking<span class="unit">ceiling: share of passages whole in at least one chunk</span></th><td class="num">0.865</td><td class="num">0.840</td><td class="num">0.890</td><td class="num">0.939</td><td class="num">0.908</td><td class="num">0.939</td><td class="num">0.896</td><td class="num">0.896</td><td class="num">0.902</td></tr><tr class="group"><th scope="rowgroup" colspan="10">Stop 2 · Search: recall@5, one service per row<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th></tr><tr><th scope="row">BM25<span class="unit">BM</span></th><td id="cell-py-fx-bm" class="num">0.663</td><td id="cell-py-rc-bm" class="num">0.616</td><td id="cell-py-st-bm" class="num">0.726</td><td id="cell-mu-fx-bm" class="num">0.774</td><td id="cell-mu-rc-bm" class="num">0.698</td><td id="cell-mu-st-bm" class="num">0.767</td><td id="cell-dl-fx-bm" class="num">0.690</td><td id="cell-dl-rc-bm" class="num">0.696</td><td id="cell-dl-st-bm" class="num">0.737</td></tr><tr><th scope="row">Dense e5-base<span class="unit">E5</span></th><td id="cell-py-fx-e5" class="num">0.533</td><td id="cell-py-rc-e5" class="num">0.568</td><td id="cell-py-st-e5" class="num">0.651</td><td id="cell-mu-fx-e5" class="num">0.622</td><td id="cell-mu-rc-e5" class="num">0.616</td><td id="cell-mu-st-e5" class="num">0.702</td><td id="cell-dl-fx-e5" class="num">0.662</td><td id="cell-dl-rc-e5" class="num">0.596</td><td id="cell-dl-st-e5" class="num">0.714</td></tr><tr><th scope="row">Dense bge-m3<span class="unit">M3</span></th><td id="cell-py-fx-m3" class="num">0.656</td><td id="cell-py-rc-m3" class="num">0.653</td><td id="cell-py-st-m3" class="num">0.732</td><td id="cell-mu-fx-m3" class="num">0.752</td><td id="cell-mu-rc-m3" class="num">0.723</td><td id="cell-mu-st-m3" class="num">0.773</td><td id="cell-dl-fx-m3" class="num">0.735</td><td id="cell-dl-rc-m3" class="num">0.673</td><td id="cell-dl-st-m3" class="num">0.780</td></tr><tr><th scope="row">Hybrid e5-base<span class="unit">HE</span></th><td id="cell-py-fx-he" class="num">0.698</td><td id="cell-py-rc-he" class="num">0.657</td><td id="cell-py-st-he" class="num">0.743</td><td id="cell-mu-fx-he" class="num">0.791</td><td id="cell-mu-rc-he" class="num">0.723</td><td id="cell-mu-st-he" class="num">0.795</td><td id="cell-dl-fx-he" class="num">0.722</td><td id="cell-dl-rc-he" class="num">0.725</td><td id="cell-dl-st-he" class="num">0.756</td></tr><tr><th scope="row">Hybrid bge-m3<span class="unit">HM</span></th><td id="cell-py-fx-hm" class="num">0.723</td><td id="cell-py-rc-hm" class="num">0.669</td><td id="cell-py-st-hm" class="num">0.769</td><td id="cell-mu-fx-hm" class="num best">0.836</td><td id="cell-mu-rc-hm" class="num">0.723</td><td id="cell-mu-st-hm" class="num">0.802</td><td id="cell-dl-fx-hm" class="num">0.754</td><td id="cell-dl-rc-hm" class="num">0.728</td><td id="cell-dl-st-hm" class="num">0.784</td></tr><tr class="lost"><th scope="row">Lost in search (ceiling − best)</th><td class="num">0.142</td><td class="num">0.171</td><td class="num">0.120</td><td class="num">0.103</td><td class="num">0.185</td><td class="num">0.136</td><td class="num">0.141</td><td class="num">0.167</td><td class="num">0.118</td></tr></tbody>
+    </table>
+  </div>
+  <ul class="notes">
+    <li><span class="hl">&nbsp;</span> Yellow marks the highest observed value; bold marks a row&#x27;s best only when it beats the runner-up by more than 7 points.</li>
+    <li><span class="mark">‡</span> 95% interval of about ±7 points per cell.</li>
+    <li><span class="mark">†</span> draft questions, not yet validated.</li>
+  </ul>
+  <p class="legend-title">How to read the codes</p><ul class="legend"><li>PY = pypdf</li><li>MU = pymupdf</li><li>DL = docling</li><li>FX = fixed</li><li>RC = recursive</li><li>ST = structure</li><li>BM = BM25</li><li>E5 = Dense e5-base</li><li>M3 = Dense bge-m3</li><li>HE = Hybrid e5-base</li><li>HM = Hybrid bge-m3</li></ul>
+</section>
+  <section id="categories" aria-labelledby="categories-h">
+  <h2 id="categories-h">By question type</h2>
+  <p class="intro">Mean recall@5 over the nine trains, by search service. Questions with no answer (15) are excluded: abstention will be measured once generation is added.</p>
+  <div class="table-scroll" role="region" aria-labelledby="categories-h" tabindex="0">
+    <table class="ruled"><thead><tr><th scope="col">Question type</th><th scope="col" class="num">Questions</th><th scope="col" class="num">BM25<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Dense e5-base<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Dense bge-m3<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Hybrid e5-base<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Hybrid bge-m3<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th></tr></thead><tbody><tr><th scope="row">Factual (one paragraph)</th><td class="num">87</td><td class="num">0.775</td><td class="num">0.746</td><td class="num">0.817</td><td class="num">0.824</td><td class="num">0.844</td></tr><tr><th scope="row">Multi-hop (two articles or acts) <span class="mark" title="Small sample: read with care.">*</span></th><td class="num">20</td><td class="num">0.489</td><td class="num">0.409</td><td class="num">0.455</td><td class="num">0.477</td><td class="num">0.498</td></tr><tr><th scope="row">Table (one cell) <span class="mark" title="Small sample: read with care.">*</span></th><td class="num">22</td><td class="num">0.657</td><td class="num">0.379</td><td class="num">0.556</td><td class="num">0.621</td><td class="num">0.616</td></tr><tr><th scope="row">Temporal <span class="mark" title="Small sample: read with care.">*</span></th><td class="num">6</td><td class="num">0.639</td><td class="num">0.593</td><td class="num">0.787</td><td class="num">0.713</td><td class="num">0.815</td></tr></tbody></table>
+  </div><p class="tie-note">No value stands more than 7 points clear of the others, so none is highlighted.</p><ul class="notes"><li><span class="mark">*</span> Small sample: read with care.</li></ul>
+</section>
+  <section id="documents" aria-labelledby="documents-h">
+  <h2 id="documents-h">By document</h2>
+  <p class="intro">Recall@5 with dense bge-m3, averaged over the three chunkers, split by PDF characteristics.</p>
+  <div class="table-scroll" role="region" aria-labelledby="documents-h" tabindex="0">
+    <table class="ruled"><thead><tr><th scope="col">Parser</th><th scope="col" class="num">Native PDF<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Scanned PDF<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">With tables<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th><th scope="col" class="num">Without tables<sup class="mark" title="95% interval of about ±7 points per cell.">‡</sup></th></tr></thead><tbody><tr><th scope="row">pypdf</th><td class="num">0.701</td><td class="num">0.000</td><td class="num">0.707</td><td class="num">0.655</td></tr><tr><th scope="row">pymupdf</th><td class="num">0.772</td><td class="num">0.000</td><td class="num">0.742</td><td class="num">0.756</td></tr><tr><th scope="row">docling</th><td class="num">0.731</td><td class="num">0.667</td><td class="num">0.747</td><td class="num">0.713</td></tr></tbody></table>
+  </div><p class="tie-note">No value stands more than 7 points clear of the others, so none is highlighted.</p>
+</section>
+  <section id="costs" aria-labelledby="costs-h">
+  <h2 id="costs-h">Costs</h2>
+  <p class="intro">Times measured on 700 pages (Apple M5, 32 GB).</p>
+  <div class="table-scroll" role="region" aria-labelledby="costs-h" tabindex="0">
+    <table class="ruled"><thead><tr><th scope="col">Component</th><th scope="col">Operation</th>
+    <th scope="col">Time</th></tr></thead><tbody><tr><th scope="row">pypdf</th><td>Text extraction</td><td class="num">7.9 s</td></tr><tr><th scope="row">pymupdf</th><td>Text extraction</td><td class="num">5.9 s</td></tr><tr><th scope="row">docling</th><td>Text extraction</td><td class="num">513 s</td></tr><tr><th scope="row">e5-base</th><td>Indexing</td><td class="num">84.6 s</td></tr><tr><th scope="row">e5-base</th><td>Search per question</td><td class="num">3.1 ms</td></tr><tr><th scope="row">bge-m3</th><td>Indexing</td><td class="num">277 s</td></tr><tr><th scope="row">bge-m3</th><td>Search per question</td><td class="num">9.1 ms</td></tr></tbody></table>
+  </div>
+</section>
+  <section id="method" aria-labelledby="method-h">
+  <h2 id="method-h">Method and reproducibility</h2>
+  <p>Corpus: 20 official acts downloaded from the Official Gazette and verified with SHA-256. Questions: 150 (135 answerable). Every reference answer is anchored to the official text (document, article, paragraph and passage), not to a chunk, so no chunker is favoured over another.</p>
+  <p>To run it again:</p>
+  <pre><code>uv sync --all-extras
+uv run itarag corpus fetch
+uv run itarag run configs/mvp.yaml</code></pre>
+  <p>Full results, question by question: <a href="https://github.com/massimiliano-dev/ita-rag-bench/tree/main/results/2026-10-26-mvp">results/2026-10-26-mvp</a></p>
+</section>
+</main>
+<footer class="footer"><p>Unofficial project. Code under the MIT licence; dataset under CC BY 4.0. Act texts are from the Gazzetta Ufficiale della Repubblica Italiana.</p><p><a href="https://github.com/massimiliano-dev/ita-rag-bench">Source on GitHub</a></p></footer>
+</body>
+</html>

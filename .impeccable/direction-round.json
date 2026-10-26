@@ -1,0 +1,140 @@
+{
+  "title": "Choose the visual world for the ita-rag-bench leaderboard",
+  "question": "The roll assigned the Official Timetable direction. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Official Timetable",
+      "kicker": "THE ROLL",
+      "lineage": "Italian railway timetables (Orario ufficiale FS, Orario Pozzi)",
+      "thesis": "Every pipeline configuration is a train on a timetable: its stops are parser, chunker, embedding and retrieval, and the timetable shows how much recall is still on board at each stop.",
+      "palette": ["#FFFFFF", "#111418", "#16357A", "#C9CED6", "#EAF0FA", "#FFD23F"],
+      "materials": ["condensed grotesk with tabular numerals", "ruled timetable grid", "footnote marks (†, ‡, *)", "one yellow marker highlight"],
+      "viewport": "Blue masthead with the run and its validity date; three conclusions in plain words in the reading column; below, the timetable: stages as rows, configurations as columns, recall remaining at each stage, the best train highlighted in yellow marker.",
+      "risk": "A dense grid can intimidate decision makers if the plain-language conclusions above it are not given room.",
+      "raised": [
+        {"from": "Hand-drawn zine", "raise": "One highlight per table, never more: the yellow marker means 'the answer to your question'."},
+        {"from": "Cutting-bench select rail", "raise": "Uncertainty is a mark, not a colour: timetable footnote symbols flag draft data and overlapping confidence intervals."},
+        {"from": "Sneaker box stacks", "raise": "Every configuration gets a train-number code (e.g. PM·ST·BGE) used identically in tables, charts and text."},
+        {"from": "Orienteering map", "raise": "Conclusions annotate the data and never replace it: every finding points to the rows that prove it."},
+        {"from": "Pin-up calendar pad", "raise": "Each run is a dated sheet: 'valid from 26 October 2026', with earlier runs one link away."}
+      ],
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "blue masthead · run, validity date, IT/EN", "x": 0, "y": 0, "w": 12, "h": 1, "accent": true},
+        {"label": "three conclusions in plain words", "x": 2, "y": 1, "w": 8, "h": 3},
+        {"label": "timetable · stages × configurations", "x": 0, "y": 4, "w": 12, "h": 4, "accent": true},
+        {"label": "footnotes · draft data, CIs", "x": 0, "y": 8, "w": 12, "h": 1},
+        {"label": "method, corpus, reproduce", "x": 2, "y": 9, "w": 8, "h": 1}
+      ]}
+    },
+    {
+      "id": "model-pick",
+      "label": "Comparative Test",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "consumer test magazines (comparison tables, 'best in test' seals)",
+      "thesis": "The benchmark as a consumer test: configurations are products, each judged on quality, cost and speed, with a 'best in test' and a 'best value'.",
+      "palette": ["#FFFFFF", "#151515", "#E30613", "#F2F2F2", "#2E7D32", "#F9A825"],
+      "materials": ["rating dots", "test seals", "comparison table with verdict row"],
+      "viewport": "Verdict up top with the 'best in test' seal; the comparison table below with rating dots per criterion and a verdict row.",
+      "risk": "The most familiar format for buyers, and the one that most invites overstating small differences as wins.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "verdict + seals", "x": 0, "y": 0, "w": 12, "h": 3, "accent": true},
+        {"label": "comparison table with rating dots", "x": 0, "y": 3, "w": 12, "h": 5},
+        {"label": "how we tested", "x": 0, "y": 8, "w": 12, "h": 2}
+      ]}
+    },
+    {
+      "id": "challenger-section",
+      "label": "Daylight Section",
+      "verdict": "competitive",
+      "lineage": "architectural daylight sections",
+      "thesis": "The pipeline drawn as a building in section: recall enters like daylight and each stage is an aperture that lets some of it through.",
+      "palette": ["#F4F4F1", "#2B2B2B", "#E8B931", "#5B7FA6"],
+      "materials": ["section-cut poche", "light band", "inclined annotation lettering"],
+      "viewport": "One long section across the page; the light band narrows stage by stage; annotations pinned to each loss.",
+      "case": "Shows where recall is lost better than any table, but decision makers do not read architectural sections by habit.",
+      "risk": "The metaphor needs a caption to be understood."
+    },
+    {
+      "id": "challenger-zine",
+      "label": "Hand-drawn Zine",
+      "verdict": "declined",
+      "lineage": "hand-drawn technical zines",
+      "thesis": "Results explained like a friend sketching on a napkin.",
+      "palette": ["#FFFDF5", "#111111", "#FFE066", "#FF8FAB", "#5ED3C6"],
+      "materials": ["marker lettering", "doodle arrows"],
+      "viewport": "Comic panels walking through the findings.",
+      "case": "Undercuts the authority buyers need to cite the numbers.",
+      "risk": "Reads as unserious next to legal documents.",
+      "kept": "One highlight per table."
+    },
+    {
+      "id": "challenger-bench",
+      "label": "Cutting Bench",
+      "verdict": "declined",
+      "lineage": "film cutting bench select rail",
+      "thesis": "Configurations as frames on a perforated rail.",
+      "palette": ["#0B0B0B", "#F26B1D", "#FFFFFF"],
+      "materials": ["film grain", "perforations"],
+      "viewport": "A rail of frames across the page.",
+      "case": "Film editing is foreign to the audience; the rail hides the comparison.",
+      "risk": "Costume on a reading page.",
+      "kept": "Uncertainty is a mark, not a colour."
+    },
+    {
+      "id": "challenger-boxes",
+      "label": "Box Stacks",
+      "verdict": "declined",
+      "lineage": "sneaker archive box walls",
+      "thesis": "Each configuration a labelled box on a wall.",
+      "palette": ["#C8641E", "#111111", "#F5F5F0"],
+      "materials": ["box board", "end labels"],
+      "viewport": "A wall of labelled boxes.",
+      "case": "Browsing boxes buries the comparison the reader came for.",
+      "risk": "Retail costume.",
+      "kept": "A consistent code labels every configuration."
+    },
+    {
+      "id": "challenger-orienteering",
+      "label": "Orienteering Map",
+      "verdict": "declined",
+      "lineage": "ISOM orienteering maps",
+      "thesis": "The data as terrain, the findings as a course over it.",
+      "palette": ["#FFFFFF", "#7A9A3A", "#F5D23A", "#8B5A2B", "#A0198F"],
+      "materials": ["contours", "control circles"],
+      "viewport": "A map of results with a purple course.",
+      "case": "Few readers know the notation.",
+      "risk": "Metaphor needs teaching.",
+      "kept": "Conclusions annotate the data, never replace it."
+    },
+    {
+      "id": "challenger-calendar",
+      "label": "Calendar Pad",
+      "verdict": "declined",
+      "lineage": "printers' advertising wall calendars",
+      "thesis": "Each run a torn-off leaf below a painted plate.",
+      "palette": ["#F3E9D2", "#B3202A", "#C9A227"],
+      "materials": ["painted plate", "date pad"],
+      "viewport": "A plate above a date grid.",
+      "case": "Kitsch for an evidence page; lands in the cream-and-red default.",
+      "risk": "Nostalgic costume.",
+      "kept": "Each run is a dated sheet."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A machine-learning leaderboard: one sortable table with heat-coloured cells and a model card, executed impeccably.",
+    "palette": ["#FFFFFF", "#F6F8FA", "#1F2328", "#0969DA"],
+    "materials": ["sortable table", "heat-map cells", "filter chips"],
+    "viewport": "Title, filter chips, one big sortable table, method below.",
+    "risk": "Indistinguishable from every other leaderboard; hides the pipeline story.",
+    "wireframe": {"cols": 12, "rows": 10, "regions": [
+      {"label": "title + filters", "x": 0, "y": 0, "w": 12, "h": 2},
+      {"label": "sortable table", "x": 0, "y": 2, "w": 12, "h": 6, "accent": true},
+      {"label": "method", "x": 0, "y": 8, "w": 12, "h": 2}
+    ]}
+  },
+  "steer": true
+}

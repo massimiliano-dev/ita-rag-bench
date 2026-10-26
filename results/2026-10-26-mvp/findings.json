@@ -1,0 +1,65 @@
+{
+  "run_id": "2026-10-26-mvp",
+  "note": "Human-written conclusions for this run. Numbers come from results/2026-10-26-mvp (paired bootstrap, 95% CI). Keep them in sync with the README. Codes: three parts (line·service) point to one timetable cell; two parts point to a line (column).",
+  "findings": [
+    {
+      "trains": [
+        "MU·ST·E5",
+        "MU·ST·M3",
+        "MU·RC·M3"
+      ],
+      "it": {
+        "title": "L'embedding conta quanto il chunking. Il parser, in media, un po' meno.",
+        "body": "A parità del resto, passare da e5-base a bge-m3 vale +9,0 punti di recall@5 (IC 95% da +5,0 a +13,5). Passare dal chunker ricorsivo a quello per struttura (articoli e commi) vale +8,7 (da +4,6 a +13,2). Passare da pypdf a PyMuPDF vale +6,6 (da +3,0 a +10,2). Nessuno dei tre fattori è trascurabile."
+      },
+      "en": {
+        "title": "The embedding matters as much as chunking. The parser, on average, slightly less.",
+        "body": "All else equal, moving from e5-base to bge-m3 is worth +9.0 points of recall@5 (95% CI +5.0 to +13.5). Moving from the recursive chunker to the structure-aware one (articles and paragraphs) is worth +8.7 (+4.6 to +13.2). Moving from pypdf to PyMuPDF is worth +6.6 (+3.0 to +10.2). None of the three factors is negligible."
+      }
+    },
+    {
+      "trains": [
+        "PY·FX·M3",
+        "MU·FX·M3",
+        "DL·FX·M3"
+      ],
+      "it": {
+        "title": "Quando il parsing fallisce, fallisce del tutto.",
+        "body": "Sul D.Lgs. 231/2001 pypdf e Docling restituiscono codici di glifi al posto del testo: recall@5 0,00, contro 0,90 con PyMuPDF. Sulla L. 241/1990, una scansione, pypdf e PyMuPDF fanno 0,00 e Docling con OCR 0,71. Senza questi due documenti i tre parser restano entro 4 punti l'uno dall'altro. Controllate prima di tutto che il testo estratto sia leggibile."
+      },
+      "en": {
+        "title": "When parsing fails, it fails completely.",
+        "body": "On Legislative Decree 231/2001, pypdf and Docling return glyph codes instead of text: recall@5 0.00, against 0.90 with PyMuPDF. On Law 241/1990, a scan, pypdf and PyMuPDF score 0.00 and Docling with OCR 0.71. Without these two documents the three parsers are within 4 points of each other. Check first that the extracted text is readable."
+      }
+    },
+    {
+      "trains": [
+        "MU·FX",
+        "MU·ST"
+      ],
+      "it": {
+        "title": "Parsing e chunking fissano un tetto prima di qualsiasi embedding.",
+        "body": "Tra il 6% e il 16% dei passaggi di riferimento non è contenuto per intero in nessun chunk: nessun retriever può recuperarli. Il chunker per struttura alza il tetto sulle domande su un singolo comma (0,954 contro 0,908) ma lo abbassa su quelle tabellari (0,773 contro 0,864)."
+      },
+      "en": {
+        "title": "Parsing and chunking set a ceiling before any embedding runs.",
+        "body": "Between 6% and 16% of the reference passages are not contained whole in any chunk, so no retriever can find them. The structure-aware chunker raises the ceiling on single-paragraph questions (0.954 against 0.908) but lowers it on table questions (0.773 against 0.864)."
+      }
+    },
+    {
+      "trains": [
+        "MU·FX·BM",
+        "MU·FX·M3",
+        "MU·FX·HM"
+      ],
+      "it": {
+        "title": "BM25 è un riferimento difficile da battere; l'ibrido è in testa, ma di poco.",
+        "body": "BM25 su PyMuPDF con chunk fissi arriva a 0,774, alla pari con la migliore configurazione densa (0,780). Il valore più alto osservato è l'ibrido BM25 + bge-m3 su MU·FX, 0,836 (IC 95% da 0,78 a 0,90): non è distinguibile dalle due configurazioni che lo seguono. Sulle domande tabellari BM25 batte il denso (0,73 contro 0,50)."
+      },
+      "en": {
+        "title": "BM25 is a hard baseline to beat; hybrid leads, but narrowly.",
+        "body": "BM25 on PyMuPDF with fixed chunks reaches 0.774, level with the best dense configuration (0.780). The highest observed value is hybrid BM25 + bge-m3 on MU·FX, 0.836 (95% CI 0.78 to 0.90): it cannot be told apart from the two configurations that follow it. On table questions BM25 beats dense retrieval (0.73 against 0.50)."
+      }
+    }
+  ]
+}
